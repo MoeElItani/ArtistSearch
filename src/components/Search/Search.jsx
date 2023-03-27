@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import magnifier from '../../assets/magnifier.svg'
 import Artist from '../Albums/Albums'
@@ -13,6 +13,14 @@ const Search = () => {
    const [searchResult, setSearchResult] = useState(artists)
    // get token from local storage
    const token = localStorage.getItem('Spotify_Token')
+
+   // remove token from local storage after 3600 seconds
+   useEffect(() => {
+      const removeToken = setTimeout(() => {
+         localStorage.removeItem('Spotify_Token')
+      }, 3600000)
+      return () => clearTimeout(removeToken)
+   }, [])
 
    // search
    async function search() {
