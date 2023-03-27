@@ -1,6 +1,6 @@
 const ArtistCard = ({ artist }) => {
-  return (
-    //  Card Component of an Artist
+   return (
+      //  Card Component of an Artist
       <div key={artist.id} className='p-4 md:p-3'>
          <img
             src={artist.image}
@@ -10,9 +10,12 @@ const ArtistCard = ({ artist }) => {
          <h2 className='font-bold text-xl mb-2'>
             {artist.name}
          </h2>
-       <p className='text-gray-700 text-base'>
-         {/* Add spacing between Genres of Array Elements */}
-            {artist.genres.join(', ')}
+         <p className='text-gray-700 text-base'>
+            {/* number format to add decimals */}
+            {new Intl.NumberFormat('en-US').format(
+               artist.followers
+            )}{' '}
+            followers
          </p>
       </div>
    )
