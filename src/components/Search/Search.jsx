@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import magnifier from '../../assets/magnifier.svg'
 import Artist from '../Albums/Albums'
 import ArtistCard from '../ArtistCard/ArtistCard'
+
 const Search = () => {
    const artists = []
 
@@ -12,13 +13,6 @@ const Search = () => {
    const [searchResult, setSearchResult] = useState(artists)
    // get token from local storage
    const token = localStorage.getItem('Spotify_Token')
-   // remove token from local storage after 3600 seconds
-   useEffect(() => {
-      const removeToken = setTimeout(() => {
-         localStorage.removeItem('Spotify_Token')
-      }, 3600000)
-      return () => clearTimeout(removeToken)
-   }, [])
 
    // search
    async function search() {
@@ -41,6 +35,7 @@ const Search = () => {
                return item.id
             })
          )
+
       // get details of all artists using their IDs
       const artistRequests = artistsID.map((artistID) =>
          fetch(
@@ -55,6 +50,7 @@ const Search = () => {
       const artistsData = await Promise.all(
          artistResponses.map((res) => res.json())
       )
+
       // update artists array with details fetched from API
       const updatedArtists = artistsData.map(
          (artistData) => {
@@ -72,6 +68,7 @@ const Search = () => {
       )
       setSearchResult(updatedArtists)
    }
+
    // function to handle form submission
    const handleSubmit = (event) => {
       event.preventDefault()
@@ -106,6 +103,7 @@ const Search = () => {
                />
             </button>
          </form>
+
          {/* Artist Cards: */}
          <div className='flex flex-wrap mx-auto mt-[3rem] w-[100%] md:w-[80%]'>
             {/* render artists cards */}
@@ -114,7 +112,7 @@ const Search = () => {
                   key={artist.id}
                   to={`/albums/${artist.id}`}
                   element={<Artist />}
-                  className='w-1/2 lg:w-1/4 px-4'
+                  className='w-1/2 lg:w-1/6 px-4'
                >
                   <ArtistCard artist={artist} />
                </Link>
@@ -123,4 +121,5 @@ const Search = () => {
       </>
    )
 }
+
 export default Search

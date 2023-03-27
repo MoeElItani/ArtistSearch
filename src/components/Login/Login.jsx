@@ -4,7 +4,7 @@ import SpotifyLogo from '../../assets/spotify-2.svg'
 const Login = () => {
    const CLIENT_ID = process.env.REACT_APP_CLIENT_ID
    const REDIRECT_URI =
-      'https://artist-search-spotify.vercel.app/search/'
+      'https://artist-search-spotify.vercel.app/search'
    const AUTH_ENDPOINT =
       'https://accounts.spotify.com/authorize'
    const RESPONSE_TYPE = 'token'
