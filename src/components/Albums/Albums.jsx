@@ -31,7 +31,7 @@ const Artist = () => {
    }, [artistID, token])
 
    return (
-      <div className='mt-[3rem] mx-auto w-[90%] md:w-[90%]'>
+      <div className='mt-[3rem] mx-auto w-[90%] md:w-[80%]'>
          {/* Artist name */}
          <h1 className='text-3xl font-bold'>
             {albums[0]?.artists[0].name}

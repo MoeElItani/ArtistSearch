@@ -4,7 +4,7 @@ const AlbumCard = ({ album }) => {
       //  Card Component of an album
       <div
          key={album.artistId}
-         className='w-1/2 lg:w-1/4 px-4 mb-8'
+         className='w-1/2 lg:w-1/4 px-4 mb-8 flex flex-col'
       >
          <img
             src={album.images[0].url}
@@ -14,13 +14,13 @@ const AlbumCard = ({ album }) => {
          <h2 className='font-bold text-xl mb-2'>
             {album.name}
          </h2>
-            <p>{album.artists[0].name}</p>
-            <p>{album.release_date}</p>
-            <p>
-               {album.total_tracks}{' '}
-               {album.total_tracks < 2 ? 'track' : 'tracks'}
-            </p>
-         <button className='w-[80%] h-14 bg-[#1DB954]'>
+         <p>{album.artists[0].name}</p>
+         <p>{album.release_date}</p>
+         <p>
+            {album.total_tracks}{' '}
+            {album.total_tracks < 2 ? 'track' : 'tracks'}
+         </p>
+         <button className='w-[80%] h-14 bg-[#1DB954] mt-auto'>
             <a
                href={album.external_urls.spotify}
                target='_blank'
