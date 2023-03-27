@@ -7,9 +7,9 @@ import ArtistCard from '../ArtistCard/ArtistCard'
 const Search = () => {
    const artists = []
 
-   // state variable for the  search query
+   // state variable for the search query
    const [searchQuery, setSearchQuery] = useState('')
-   // state variable  for the search results having artists as the initial data
+   // state variable for the search results having artists as the initial data
    const [searchResult, setSearchResult] = useState(artists)
    // get token from local storage
    const token = localStorage.getItem('Spotify_Token')
@@ -22,8 +22,13 @@ const Search = () => {
       return () => clearTimeout(removeToken)
    }, [])
 
-   // search
+   // search function
    async function search() {
+      if (!token) {
+         console.log('Token not found')
+         return
+      }
+
       // get Artist ID
       const searchParams = {
          method: 'GET',
@@ -80,7 +85,7 @@ const Search = () => {
    // function to handle form submission
    const handleSubmit = (event) => {
       event.preventDefault()
-      setSearchResult(searchResult)
+      search()
    }
 
    return (
