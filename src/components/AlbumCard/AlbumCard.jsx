@@ -1,5 +1,4 @@
 const AlbumCard = ({ album }) => {
-   console.log(album)
    return (
       //  Card Component of an album
       <div
