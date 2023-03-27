@@ -2,12 +2,13 @@ import React from 'react'
 import SpotifyLogo from '../../assets/spotify-2.svg'
 
 const Login = () => {
-   const CLIENT_ID =  process.env.REACT_APP_CLIENT_ID
-   const REDIRECT_URI = 'http://localhost:3000/search'
+   const CLIENT_ID = process.env.REACT_APP_CLIENT_ID
+   const REDIRECT_URI =
+      'https://spotify-artist-search.vercel.app/search'
    const AUTH_ENDPOINT =
       'https://accounts.spotify.com/authorize'
-  const RESPONSE_TYPE = 'token'
-  
+   const RESPONSE_TYPE = 'token'
+
    return (
       <div className='h-[90vh] flex flex-col items-center justify-center'>
          <a
