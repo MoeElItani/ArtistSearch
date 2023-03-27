@@ -112,7 +112,7 @@ const Search = () => {
                   key={artist.id}
                   to={`/albums/${artist.id}`}
                   element={<Artist />}
-                  className='w-1/2 lg:w-1/6 px-4'
+                  className='w-1/2 lg:w-1/4 px-4'
                >
                   <ArtistCard artist={artist} />
                </Link>
