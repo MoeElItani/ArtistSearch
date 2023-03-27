@@ -5,7 +5,7 @@ const ArtistCard = ({ artist }) => {
          <img
             src={artist.image}
             alt={artist.name}
-            className='mb-3 rounded shadow-md h-[240px] w-[240px] object-cover object-center'
+            className='mb-3 rounded shadow-md h-48 w-48 object-cover object-center'
          />
          <h2 className='font-bold text-xl mb-2'>
             {artist.name}
