@@ -3,17 +3,15 @@ import { Link } from 'react-router-dom'
 import magnifier from '../../assets/magnifier.svg'
 import Artist from '../Albums/Albums'
 import ArtistCard from '../ArtistCard/ArtistCard'
-
 const Search = () => {
    const artists = []
 
-   // state variable for the search query
+   // state variable for the  search query
    const [searchQuery, setSearchQuery] = useState('')
-   // state variable for the search results having artists as the initial data
+   // state variable  for the search results having artists as the initial data
    const [searchResult, setSearchResult] = useState(artists)
    // get token from local storage
    const token = localStorage.getItem('Spotify_Token')
-
    // remove token from local storage after 3600 seconds
    useEffect(() => {
       const removeToken = setTimeout(() => {
@@ -22,13 +20,8 @@ const Search = () => {
       return () => clearTimeout(removeToken)
    }, [])
 
-   // search function
+   // search
    async function search() {
-      if (!token) {
-         console.log('Token not found')
-         return
-      }
-
       // get Artist ID
       const searchParams = {
          method: 'GET',
@@ -48,7 +41,6 @@ const Search = () => {
                return item.id
             })
          )
-
       // get details of all artists using their IDs
       const artistRequests = artistsID.map((artistID) =>
          fetch(
@@ -63,7 +55,6 @@ const Search = () => {
       const artistsData = await Promise.all(
          artistResponses.map((res) => res.json())
       )
-
       // update artists array with details fetched from API
       const updatedArtists = artistsData.map(
          (artistData) => {
@@ -81,11 +72,10 @@ const Search = () => {
       )
       setSearchResult(updatedArtists)
    }
-
    // function to handle form submission
    const handleSubmit = (event) => {
       event.preventDefault()
-      search()
+      setSearchResult(searchResult)
    }
 
    return (
@@ -116,7 +106,6 @@ const Search = () => {
                />
             </button>
          </form>
-
          {/* Artist Cards: */}
          <div className='flex flex-wrap mx-auto mt-[3rem] w-[100%] md:w-[80%]'>
             {/* render artists cards */}
@@ -134,5 +123,4 @@ const Search = () => {
       </>
    )
 }
-
 export default Search
