@@ -30,15 +30,12 @@ const Search = () => {
 
       useEffect(() => {
          const intervalId = setInterval(() => {
-            const tokenExpiryTime =
-               parseInt(
-                  localStorage.getItem(
-                     'Spotify_Token_Expiry'
-                  )
-               ) || 0
+            const tokenExpiryTime = parseInt(
+               localStorage.getItem('Spotify_Token_Expiry')
+            )
             const currentTime = Date.now()
 
-            if (currentTime >= tokenExpiryTime) {
+            if (currentTime > tokenExpiryTime) {
                localStorage.removeItem('Spotify_Token')
                localStorage.removeItem(
                   'Spotify_Token_Expiry'
