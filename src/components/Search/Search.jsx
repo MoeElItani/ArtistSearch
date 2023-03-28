@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import magnifier from '../../assets/magnifier.svg'
 import Artist from '../Albums/Albums'
@@ -13,6 +13,43 @@ const Search = () => {
    const [searchResult, setSearchResult] = useState(artists)
    // get token from local storage
    const token = localStorage.getItem('Spotify_Token')
+
+   function useSpotifyTokenExpiry() {
+      useEffect(() => {
+         const tokenExpiryTime =
+            parseInt(
+               localStorage.getItem('Spotify_Token_Expiry')
+            ) || 0
+         const currentTime = Date.now()
+
+         if (currentTime >= tokenExpiryTime) {
+            localStorage.removeItem('Spotify_Token')
+            localStorage.removeItem('Spotify_Token_Expiry')
+         }
+      }, [])
+
+      useEffect(() => {
+         const intervalId = setInterval(() => {
+            const tokenExpiryTime =
+               parseInt(
+                  localStorage.getItem(
+                     'Spotify_Token_Expiry'
+                  )
+               ) || 0
+            const currentTime = Date.now()
+
+            if (currentTime >= tokenExpiryTime) {
+               localStorage.removeItem('Spotify_Token')
+               localStorage.removeItem(
+                  'Spotify_Token_Expiry'
+               )
+            }
+         }, 1000)
+
+         return () => clearInterval(intervalId)
+      }, [])
+   }
+   useSpotifyTokenExpiry()
 
    // search
    async function search() {
