@@ -43,10 +43,21 @@ const Search = () => {
                localStorage.removeItem(
                   'Spotify_Token_Expiry'
                )
+               clearInterval(intervalId)
             }
          }, 1000)
 
          return () => clearInterval(intervalId)
+      }, [])
+
+      // set token expiration time in local storage
+      useEffect(() => {
+         const currentTime = Date.now()
+         const tokenExpiryTime = currentTime + 3600000 // token expires after 1 hour
+         localStorage.setItem(
+            'Spotify_Token_Expiry',
+            tokenExpiryTime
+         )
       }, [])
    }
    useSpotifyTokenExpiry()
